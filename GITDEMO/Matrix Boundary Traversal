@@ -1,0 +1,45 @@
+class Solution {
+	public:
+	vector<int> boundaryTraversal(vector<vector<int>> & mat) {
+		int n = mat.size();
+		int m = mat[0].size();
+		vector<int> ans;
+		int T = 0, D = n - 1, L = 0, R = m - 1;
+		//0->L-R, 1->T-D, 2->R-L, 3-> D-T
+			if (n == 1) {
+				for (int i = L; i <= R; i++) {
+					ans.push_back(mat[T][i]);
+				}
+				return ans;
+			
+			}
+			if (m==1) {
+				for (int i = T; i <= D; i++) {
+					ans.push_back(mat[i][R]);
+				}
+				return ans;
+			}	
+             
+			for (int i = L; i <= R; i++) {
+					ans.push_back(mat[T][i]);
+				
+				}
+				 
+				for (int i = T+1; i <= D; i++) {
+					ans.push_back(mat[i][R]);
+				
+				} 
+				for (int i = R-1; i >= L; i--) {
+					ans.push_back(mat[D][i]);
+				
+				}
+			
+				for (int i = D-1; i >= T+1; i--) {
+				    ans.push_back(mat[i][L]);
+				   
+				}
+			
+		
+		return ans;
+	}
+};
