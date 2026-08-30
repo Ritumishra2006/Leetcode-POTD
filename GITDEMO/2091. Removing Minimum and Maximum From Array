@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int minimumDeletions(vector<int>& nums) {
+        int n = nums.size();
+        int mini = 1e9;
+        int maxi = -1e9;
+        int minIdx = -1;
+        int maxIdx = -1;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] < mini) {
+                mini = nums[i];
+                minIdx = i;
+            }
+            if (nums[i] > maxi) {
+                maxi = nums[i];
+                maxIdx = i;
+            }
+        }
+        if (minIdx > maxIdx) {
+            swap(minIdx, maxIdx);
+        }
+        int sce1 = maxIdx + 1;                // del from left
+        int sce2 = n - minIdx;                // del from right
+        int sce3 = minIdx + 1 + (n - maxIdx); // del from both side
+        return min({sce1, sce2, sce3});
+    }
+};
